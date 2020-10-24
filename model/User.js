@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectIdType = mongoose.Schema.Types.ObjectId;
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -18,6 +19,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         min: 6,
         max: 1024,
+    },
+    restaurantIds: {
+        type: [ObjectIdType]
     },
     date: {
         type: Date,
