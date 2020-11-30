@@ -3,7 +3,7 @@ const Restaurant = require('../model/Restaurant');
 const TableRoom = require('../model/TableRoom');
 const verifyToken = require('./verifyToken');
 
-router.post('/check', verifyToken, async (req, res) => {
+router.get('/check', verifyToken, async (req, res) => {
     let room = await TableRoom.findOne({
         _id: req.body.tableRoomId
     });
