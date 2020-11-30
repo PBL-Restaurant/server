@@ -9,6 +9,9 @@ const restaurantSchema = new mongoose.Schema({
     },
     menu: {
         type: [ObjectIdType]
+    },
+    room: {
+        type: [ObjectIdType]
     }
 });
 

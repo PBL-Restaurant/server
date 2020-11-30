@@ -1,6 +1,7 @@
 const User = require('../model/User');
 const Restaurant = require('../model/Restaurant');
 const MenuElement = require('../model/MenuElement');
+const TableRoom = require('../model/TableRoom');
 
 async function verifyContainsRestaurant(req) {
     const user = await User.findOne({
@@ -37,10 +38,26 @@ async function getRestaurant(restaurantId) {
         });
     }
 
+    const tableRoomIds = restaurant.room;
+    const tableRooms = [];
+    for (let j = 0; j < tableRoomIds.length; j++) {
+        let tableRoomId = tableRoomIds[j];
+        let tableRoom = await TableRoom.findOne({
+            _id: tableRoomId
+        });
+
+        tableRooms.push({
+            "_id": tableRoom._id,
+            "booked": tableRoom.booked,
+            "users": tableRoom.users
+        });
+    }
+
     return {
         "_id": restaurant._id,
         "title": restaurant.title,
-        "menu": menuElements
+        "menu": menuElements,
+        "room": tableRooms
     }
 }
 
