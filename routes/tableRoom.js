@@ -23,7 +23,7 @@ router.post('/create', verifyToken, async (req, res) => {
         await restaurant.save();
         await tableRoom.save();
         res.send({
-            menuElement: tableRoom._id,
+            tableRoom: tableRoom._id,
         });
     } catch (err) {
         res.status(400).send(err);
