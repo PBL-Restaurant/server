@@ -2,6 +2,7 @@ const User = require('../model/User');
 const Restaurant = require('../model/Restaurant');
 const MenuElement = require('../model/MenuElement');
 const TableRoom = require('../model/TableRoom');
+const ServiceUser = require('../model/ServiceUser');
 
 async function verifyContainsRestaurant(req) {
     const user = await User.findOne({
@@ -53,11 +54,26 @@ async function getRestaurant(restaurantId) {
         });
     }
 
+    const servicesIds = restaurant.service;
+    const services = [];
+    for (let j = 0; j < servicesIds.length; j++) {
+        let serviceUser = await ServiceUser.findOne({
+            _id: servicesIds[j]
+        });
+
+        services.push({
+            "_id": serviceUser._id,
+            "userId": serviceUser.userId,
+            "type": serviceUser.type
+        });
+    }
+
     return {
         "_id": restaurant._id,
         "title": restaurant.title,
         "menu": menuElements,
-        "room": tableRooms
+        "room": tableRooms,
+        "service": services
     }
 }
 

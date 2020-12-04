@@ -12,6 +12,9 @@ const restaurantSchema = new mongoose.Schema({
     },
     room: {
         type: [ObjectIdType]
+    },
+    service: {
+        type: [ObjectIdType]
     }
 });
 

@@ -14,6 +14,7 @@ const menuElementsRoute = require('./routes/menuElement');
 const menuRoute = require('./routes/menu');
 const tableRoomRoute = require('./routes/tableRoom');
 const roomRoute = require('./routes/room');
+const serviceRoute = require('./routes/service');
 
 mongoose.connect(
     process.env.DB_CONNECT,
@@ -34,6 +35,7 @@ app.use('/api/menuElement', menuElementsRoute);
 app.use('/api/menu', menuRoute);
 app.use('/api/tableRoom', tableRoomRoute);
 app.use('/api/room', roomRoute);
+app.use('/api/service', serviceRoute);
 
 app.listen(3000, () => {
     console.log("Server UP.");
