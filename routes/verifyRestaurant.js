@@ -77,4 +77,31 @@ async function getRestaurant(restaurantId) {
     }
 }
 
-module.exports = { verifyContainsRestaurant, getRestaurant };
+async function verifyContainsServiceUser(req) {
+    const user = await User.findOne({
+        _id: req.user._id
+    });
+
+    const restaurantId = req.body.restaurantId;
+    return user.restaurantIds.includes(restaurantId);
+
+    let restaurant = await Restaurant.findOne({
+        _id: req.body.restaurantId
+    });
+
+    let isServiceUser = false;
+    for (let i = 0; i < restaurant.service.length; i++) {
+        let service = await ServiceUser.findOne({
+            _id: restaurant.service[i]
+        });
+
+        if (service.userId == req.user._id) {
+            isServiceUser = true;
+            break;
+        }
+    }
+
+    return isServiceUser;
+}
+
+module.exports = { verifyContainsRestaurant, getRestaurant, verifyContainsServiceUser };

@@ -12,7 +12,10 @@ router.get('/',  async (req, res) => {
         }
 
         res.send({
-            restaurant: restaurant
+            restaurant: {
+                _id: restaurant._id,
+                menu: restaurant.menu
+            }
         });
     } catch (err) {
         res.status(400).send(err);
