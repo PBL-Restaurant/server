@@ -27,7 +27,7 @@ router.post('/cooked', verifyToken, async (req, res) => {
     }
 });
 
-router.get('/get', verifyToken, async (req, res) => {
+router.post('/get', verifyToken, async (req, res) => {
     if (await verifyContainsServiceUser(req) === false) {
         return res.status(400).send('User not in Restaurant Service.');
     }

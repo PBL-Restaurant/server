@@ -61,7 +61,7 @@ router.post('/remove', verifyToken, async (req, res) => {
     }
 });
 
-router.get('/', verifyToken, async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     const user = await User.findOne({
         _id: req.user._id
     });

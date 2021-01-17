@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { getRestaurant } = require('./verifyRestaurant');
 
-router.get('/',  async (req, res) => {
+router.post('/',  async (req, res) => {
     const restaurantId = req.body.restaurantId;
 
     try {
