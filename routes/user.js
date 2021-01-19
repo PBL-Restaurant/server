@@ -8,9 +8,10 @@ router.get('/', verify, async (req, res) => {
     });
 
     res.json({
-        logged: true,
+        id: user._id,
         name: user.name,
         email: user.email,
+        logged: true,
     })
 });
 
