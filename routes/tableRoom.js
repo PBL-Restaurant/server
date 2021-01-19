@@ -81,4 +81,26 @@ router.post('/clear', verifyToken, async (req, res) => {
     }
 });
 
+
+router.post('/get', verifyToken, async (req, res) => {
+    if (!await verifyContainsRestaurant(req)) {
+        return res.status(400).send('Restaurant is wrong.');
+    }
+
+    let room = await TableRoom.findOne({
+        _id: req.body.tableRoomId
+    });
+
+    try {
+        res.send({
+            _id: room._id,
+            title: room.title,
+            users: room.users,
+            booked: room.booked
+        });
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
 module.exports = router;
